@@ -1,1 +1,1 @@
-# Recoil을 활용한 React Todo App
+# React Trello(kanban)
