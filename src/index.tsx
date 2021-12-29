@@ -3,11 +3,11 @@ import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 import App from './App';
 import GlobalStyle from './globalStyle';
-import { dartTheme } from './theme';
+import { defaultTheme } from './theme';
 
 ReactDOM.render(
   <RecoilRoot>
-    <ThemeProvider theme={dartTheme}>
+    <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <App />
     </ThemeProvider>
