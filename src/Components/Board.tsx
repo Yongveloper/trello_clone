@@ -65,10 +65,12 @@ function Board({ toDos, boardId }: IBoardProps) {
       text: toDo,
     };
     setToDos((allBoards) => {
-      return {
+      const newToDos = {
         ...allBoards,
         [boardId]: [newToDo, ...allBoards[boardId]],
       };
+      window.localStorage.setItem('toDos', JSON.stringify(newToDos));
+      return newToDos;
     });
     setValue('toDo', '');
   };
