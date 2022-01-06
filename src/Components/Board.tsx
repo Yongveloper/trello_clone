@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
@@ -42,8 +41,13 @@ const Area = styled.div<IAreaProps>`
 
 const Form = styled.form`
   width: 100%;
-  input: {
-    width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
   }
 `;
 
