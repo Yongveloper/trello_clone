@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { toDoState } from './atom';
 import Board from './Components/Board';
+import DeleteArea from './Components/DeleteArea';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,19 +22,6 @@ const Boards = styled.div`
   width: 100%;
   gap: 10px;
   grid-template-columns: repeat(3, 1fr);
-`;
-
-const DeleteArea = styled.div`
-  width: 138px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ff9ff3;
-  span {
-    position: absolute;
-    font-weight: 600;
-  }
 `;
 
 function App() {
@@ -92,14 +80,7 @@ function App() {
             <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
           ))}
         </Boards>
-        <Droppable droppableId="delete">
-          {(magic) => (
-            <DeleteArea ref={magic.innerRef} {...magic.droppableProps}>
-              <span>Delete Area</span>
-              {magic.placeholder}
-            </DeleteArea>
-          )}
-        </Droppable>
+        <DeleteArea />
       </Wrapper>
     </DragDropContext>
   );
