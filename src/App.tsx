@@ -32,10 +32,12 @@ function App() {
         const taskObj = boardCopy[source.index];
         boardCopy.splice(source.index, 1);
         boardCopy.splice(destination?.index, 0, taskObj);
-        return {
+        const newToDos = {
           ...allBoards,
           [source.droppableId]: boardCopy,
         };
+        window.localStorage.setItem('toDos', JSON.stringify(newToDos));
+        return newToDos;
       });
     } else {
       // cross board movement
@@ -45,11 +47,13 @@ function App() {
         const destinationBoard = [...allBoards[destination.droppableId]];
         sourceBoard.splice(source.index, 1);
         destinationBoard.splice(destination.index, 0, taskObj);
-        return {
+        const newToDos = {
           ...allBoards,
           [source.droppableId]: sourceBoard,
           [destination.droppableId]: destinationBoard,
         };
+        window.localStorage.setItem('toDos', JSON.stringify(newToDos));
+        return newToDos;
       });
     }
   };
