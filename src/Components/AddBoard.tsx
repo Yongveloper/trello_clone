@@ -3,7 +3,11 @@ import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { toDoState } from '../atom';
 
-const AddBoardForm = styled.form``;
+const AddBoardForm = styled.form`
+  input {
+    text-align: center;
+  }
+`;
 
 interface IBoardProps {
   boardName: string;
