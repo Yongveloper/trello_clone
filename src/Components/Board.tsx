@@ -48,6 +48,7 @@ const Form = styled.form`
     padding: 10px;
     border: none;
     border-radius: 3px;
+    text-align: center;
   }
 `;
 
@@ -80,40 +81,36 @@ function Board({ toDos, boardId, index }: IBoardProps) {
     setValue('toDo', '');
   };
   return (
-    <Draggable draggableId={boardId} index={Number(index)}>
-      {(magic) => (
-        <Wrapper ref={magic.innerRef} {...magic.draggableProps}>
-          <Title {...magic.dragHandleProps}>{boardId}</Title>
-          <Form onSubmit={handleSubmit(onValid)}>
-            <input
-              {...register('toDo', { required: true })}
-              type="text"
-              placeholder={`Add task on ${boardId}`}
-            />
-          </Form>
-          <Droppable droppableId={boardId} type="card">
-            {(magic, snapshot) => (
-              <Area
-                isDraggingOver={snapshot.isDraggingOver}
-                isDraggingFromThis={Boolean(snapshot.draggingFromThisWith)}
-                ref={magic.innerRef}
-                {...magic.droppableProps}
-              >
-                {toDos.map((toDo, index) => (
-                  <DraggableCard
-                    key={toDo.id}
-                    index={index}
-                    toDoId={toDo.id}
-                    toDoText={toDo.text}
-                  />
-                ))}
-                {magic.placeholder}
-              </Area>
-            )}
-          </Droppable>
-        </Wrapper>
-      )}
-    </Draggable>
+    <Wrapper>
+      <Title>{boardId}</Title>
+      <Form onSubmit={handleSubmit(onValid)}>
+        <input
+          {...register('toDo', { required: true })}
+          type="text"
+          placeholder={`Add task on ${boardId}`}
+        />
+      </Form>
+      <Droppable droppableId={boardId}>
+        {(magic, snapshot) => (
+          <Area
+            isDraggingOver={snapshot.isDraggingOver}
+            isDraggingFromThis={Boolean(snapshot.draggingFromThisWith)}
+            ref={magic.innerRef}
+            {...magic.droppableProps}
+          >
+            {toDos.map((toDo, index) => (
+              <DraggableCard
+                key={toDo.id}
+                index={index}
+                toDoId={toDo.id}
+                toDoText={toDo.text}
+              />
+            ))}
+            {magic.placeholder}
+          </Area>
+        )}
+      </Droppable>
+    </Wrapper>
   );
 }
 
