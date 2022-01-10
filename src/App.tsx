@@ -1,4 +1,4 @@
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { toDoState } from './atom';
@@ -77,11 +77,21 @@ function App() {
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
         <AddBoard />
-        <Boards>
-          {Object.keys(toDos).map((boardId) => (
-            <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
-          ))}
-        </Boards>
+        <Droppable droppableId="boards" type="board">
+          {(magic) => (
+            <Boards ref={magic.innerRef} {...magic.droppableProps}>
+              {Object.keys(toDos).map((boardId, index) => (
+                <Board
+                  boardId={boardId}
+                  key={boardId}
+                  toDos={toDos[boardId]}
+                  index={index}
+                />
+              ))}
+              {/* {magic.placeholder} */}
+            </Boards>
+          )}
+        </Droppable>
         <DeleteArea />
       </Wrapper>
     </DragDropContext>
